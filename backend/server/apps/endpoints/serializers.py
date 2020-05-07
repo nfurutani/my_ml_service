@@ -4,6 +4,9 @@ from apps.endpoints.models import Endpoint
 from apps.endpoints.models import MLAlgorithm
 from apps.endpoints.models import MLAlgorithmStatus
 from apps.endpoints.models import MLRequest
+# please add at the beginning of file backend/server/apps/endpoints/serializers.py
+from apps.endpoints.models import ABTest
+
 
 class EndpointSerializer(serializers.ModelSerializer):
     class Meta:
@@ -53,3 +56,24 @@ class MLRequestSerializer(serializers.ModelSerializer):
             "created_at",
             "parent_mlalgorithm",
         )
+
+# please add at the end of file backend/server/apps/endpoints/serializers.py
+class ABTestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ABTest
+        read_only_fields = (
+            "id",
+            "ended_at",
+            "created_at",
+            "summary",
+        )
+        fields = (
+            "id",
+            "title",
+            "created_by",
+            "created_at",
+            "ended_at",
+            "summary",
+            "parent_mlalgorithm_1",
+            "parent_mlalgorithm_2",
+            )
